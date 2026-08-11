@@ -1,6 +1,6 @@
 "use strict";
 
-// Add your NASA API key here
+
 const apiKey = "gHLiZHlGfGYAkEDEtwQJt23B0XzeOHc1wpOIswjI";
 
 // NASA Astronomy Picture of the Day API

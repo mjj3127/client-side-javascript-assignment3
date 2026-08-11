@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Explore NASA's Astronomy Picture of the Day."
+    >
+
+    <title>NASA Space Explorer</title>
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- My CSS file -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- My JavaScript file -->
+    <script src="js/script.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a class="logo" href="#">
+            <span class="logo-icon">✦</span>
+            Space Explorer
+        </a>
+
+        <p class="api-label">Powered by NASA Open APIs</p>
+    </header>
+
+    <main>
+        <!-- Introduction area -->
+        <section class="hero">
+            <div class="hero-content">
+                <p class="eyebrow">Explore the universe</p>
+
+                <h1>
+                    Discover NASA's
+                    <span>picture of the day.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Select a date or discover a random astronomy image from
+                    NASA's collection.
+                </p>
+
+                <!-- Search controls -->
+                <div class="search-panel">
+                    <div class="date-group">
+                        <label for="space-date">Choose a date</label>
+                        <input type="date" id="space-date">
+                    </div>
+
+                    <button type="button" id="search-button">
+                        Explore this date
+                    </button>
+
+                    <button type="button" id="random-button" class="secondary-button">
+                        Surprise me
+                    </button>
+                </div>
+
+                <p id="form-error" class="form-error" aria-live="polite"></p>
+            </div>
+
+            <div class="planet" aria-hidden="true">
+                <div class="planet-ring"></div>
+                <span class="star star-one">✦</span>
+                <span class="star star-two">✧</span>
+                <span class="star star-three">✦</span>
+            </div>
+        </section>
+
+        <!-- Loading message -->
+        <section
+            id="loading"
+            class="loading"
+            aria-live="polite"
+            hidden
+        >
+            <div class="spinner"></div>
+            <p>Contacting NASA...</p>
+        </section>
+
+        <!-- Error message -->
+        <section
+            id="error-message"
+            class="api-error"
+            aria-live="assertive"
+            hidden
+        >
+            <h2>Houston, we have a problem!</h2>
+            <p id="error-text">
+                The astronomy content could not be loaded.
+            </p>
+        </section>
+
+        <!-- NASA results are added here -->
+        <section
+            id="result"
+            class="result-card"
+            aria-live="polite"
+            hidden
+        >
+            <div id="media-container" class="media-container"></div>
+
+            <div class="result-information">
+                <div class="result-top">
+                    <p id="result-date" class="result-date"></p>
+                    <span id="media-badge" class="media-badge"></span>
+                </div>
+
+                <h2 id="result-title"></h2>
+
+                <p id="result-description" class="result-description"></p>
+
+                <div class="result-footer">
+                    <p id="copyright"></p>
+
+                    <a
+                        id="high-quality-link"
+                        class="image-link"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        View original media ↗
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Small information cards -->
+        <section class="information-grid">
+            <article>
+                <span>01</span>
+                <h2>Select a date</h2>
+                <p>Explore NASA astronomy content dating back to June 1995.</p>
+            </article>
+
+            <article>
+                <span>02</span>
+                <h2>Discover something new</h2>
+                <p>Use the random button to travel to a surprise part of space.</p>
+            </article>
+
+            <article>
+                <span>03</span>
+                <h2>Learn about space</h2>
+                <p>Read NASA's explanation for every image or video.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+     
+        <p id="student-info"></p>
+
+        <p>
+            Data provided by
+            <a
+                href="https://api.nasa.gov/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                NASA Open APIs
+            </a>
+        </p>
+
+        <p>
+            Documentation followed:
+            <a
+                href="https://github.com/nasa/apod-api"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                NASA APOD API Documentation
+            </a>
+        </p>
+    </footer>
+</body>
+</html>

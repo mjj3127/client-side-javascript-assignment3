@@ -1,6 +1,5 @@
 "use strict";
 
-
 const apiKey = "gHLiZHlGfGYAkEDEtwQJt23B0XzeOHc1wpOIswjI";
 
 // NASA Astronomy Picture of the Day API
@@ -26,7 +25,7 @@ const copyrightText = document.querySelector("#copyright");
 const mediaBadge = document.querySelector("#media-badge");
 const highQualityLink = document.querySelector("#high-quality-link");
 
-
+// Student information
 studentInfo.textContent =
     "Mariya Josephine Jemy | Student ID: 200594567";
 
@@ -66,7 +65,6 @@ randomButton.addEventListener("click", function () {
 
     const randomDate = getRandomDate();
 
-    // Show the random date inside the date input
     dateInput.value = randomDate;
 
     getSpaceData(
@@ -74,7 +72,7 @@ randomButton.addEventListener("click", function () {
     );
 });
 
-// Generate a random date between June 16, 1995 and today
+// Generate a random date
 function getRandomDate() {
     const firstApodDate = new Date("1995-06-16T00:00:00");
     const currentDate = new Date(`${today}T00:00:00`);
@@ -94,7 +92,9 @@ async function getSpaceData(queryString) {
     showLoading();
 
     try {
-        const response = await fetch(`${apiUrl}?${queryString}`);
+        const response = await fetch(
+            `${apiUrl}?${queryString}`
+        );
 
         if (!response.ok) {
             throw new Error(
@@ -104,7 +104,6 @@ async function getSpaceData(queryString) {
 
         let data = await response.json();
 
-        // This also supports array responses
         if (Array.isArray(data)) {
             data = data[0];
         }
@@ -125,9 +124,8 @@ async function getSpaceData(queryString) {
     }
 }
 
-// Display NASA's result on the page
+// Display NASA result
 function displaySpaceData(data) {
-    // Remove the previous image or video
     mediaContainer.replaceChildren();
 
     resultDate.textContent = formatDate(data.date);
@@ -135,7 +133,6 @@ function displaySpaceData(data) {
     resultDescription.textContent = data.explanation;
     mediaBadge.textContent = data.media_type;
 
-    // Show the image credit when available
     if (data.copyright) {
         copyrightText.textContent =
             `Image credit: ${data.copyright}`;
@@ -143,7 +140,6 @@ function displaySpaceData(data) {
         copyrightText.textContent = "Image credit: NASA";
     }
 
-    // Display an image
     if (data.media_type === "image") {
         const image = document.createElement("img");
 
@@ -158,10 +154,7 @@ function displaySpaceData(data) {
         highQualityLink.textContent =
             "View high-resolution image ↗";
         highQualityLink.hidden = false;
-    }
-
-    // Display a video
-    else if (data.media_type === "video") {
+    } else if (data.media_type === "video") {
         const video = document.createElement("iframe");
 
         video.className = "space-video";
@@ -178,10 +171,7 @@ function displaySpaceData(data) {
         highQualityLink.textContent =
             "Open original video ↗";
         highQualityLink.hidden = false;
-    }
-
-    // Handle an unsupported media type
-    else {
+    } else {
         const message = document.createElement("p");
 
         message.textContent =
@@ -191,7 +181,6 @@ function displaySpaceData(data) {
         highQualityLink.hidden = true;
     }
 
-    // Reveal the result
     errorSection.hidden = true;
     resultSection.hidden = false;
 
@@ -201,7 +190,7 @@ function displaySpaceData(data) {
     });
 }
 
-// Show the loading message
+// Show loading
 function showLoading() {
     resultSection.hidden = true;
     errorSection.hidden = true;
@@ -210,7 +199,7 @@ function showLoading() {
     setButtonsDisabled(true);
 }
 
-// Show an error message
+// Show error
 function showError(message) {
     resultSection.hidden = true;
     errorSection.hidden = false;
@@ -220,27 +209,25 @@ function showError(message) {
             "Please add your NASA API key inside js/script.js.";
     } else if (message.includes("503")) {
         errorText.textContent =
-            "NASA's server is temporarily unavailable. " +
-            "Please try again.";
+            "NASA's server is temporarily unavailable. Please try again.";
     } else if (message.includes("403")) {
         errorText.textContent =
             "The NASA API key was rejected. Please check your key.";
     } else if (message.includes("429")) {
         errorText.textContent =
-            "The API request limit has been reached. " +
-            "Please wait and try again.";
+            "The API request limit has been reached. Please wait and try again.";
     } else {
         errorText.textContent = message;
     }
 }
 
-// Disable or enable the buttons
+// Disable or enable buttons
 function setButtonsDisabled(isDisabled) {
     searchButton.disabled = isDisabled;
     randomButton.disabled = isDisabled;
 }
 
-// Format a date for display
+// Format date
 function formatDate(dateString) {
     const date = new Date(`${dateString}T00:00:00`);
 
@@ -251,7 +238,7 @@ function formatDate(dateString) {
     });
 }
 
-// Load today's NASA content when the page opens
+// Load today's NASA content when page opens
 getSpaceData(
     `api_key=${apiKey}&date=${today}&thumbs=true`
 );
